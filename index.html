@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Realtime Chat</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1><i class="fas fa-comments"></i> Realtime Chat</h1>
+            <div class="status-indicator">
+                <span id="status-dot" class="status-dot"></span>
+                <span id="connection-status">Connecting...</span>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <!-- Sidebar với thông tin người dùng -->
+            <div class="sidebar">
+                <div class="user-section" id="user-section">
+                    <div class="user-form" id="user-form">
+                        <h3><i class="fas fa-user-plus"></i> Join Chat</h3>
+                        <div class="form-group">
+                            <input type="text" id="username-input" placeholder="Enter your username" maxlength="20">
+                            <button id="join-btn" class="btn-primary">
+                                <i class="fas fa-sign-in-alt"></i> Join
+                            </button>
+                        </div>
+                        <p class="form-note">Choose a username to start chatting</p>
+                    </div>
+                    
+                    <div class="user-info" id="user-info" style="display: none;">
+                        <h3><i class="fas fa-user-circle"></i> Your Profile</h3>
+                        <div class="current-user">
+                            <span id="current-username"></span>
+                            <button id="logout-btn" class="btn-secondary">
+                                <i class="fas fa-sign-out-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Online Users -->
+                <div class="online-users-section">
+                    <h3><i class="fas fa-users"></i> Online Users (<span id="online-count">0</span>)</h3>
+                    <div class="users-list" id="users-list">
+                        <div class="empty-users">No users online</div>
+                    </div>
+                </div>
+
+                <!-- Server Info -->
+                <div class="server-info">
+                    <h3><i class="fas fa-server"></i> Server Status</h3>
+                    <div class="server-stats">
+                        <div class="stat">
+                            <span class="stat-label">Messages:</span>
+                            <span id="total-messages" class="stat-value">0</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">Uptime:</span>
+                            <span id="uptime" class="stat-value">0s</span>
+                        </div>
+                    </div>
+                    <button id="refresh-btn" class="btn-secondary">
+                        <i class="fas fa-sync-alt"></i> Refresh
+                    </button>
+                </div>
+            </div>
+
+            <!-- Chat Area -->
+            <div class="chat-area">
+                <!-- Messages Container -->
+                <div class="messages-container" id="messages-container">
+                    <div class="welcome-message">
+                        <div class="welcome-icon">
+                            <i class="fas fa-comment-dots"></i>
+                        </div>
+                        <h2>Welcome to Realtime Chat</h2>
+                        <p>Join the conversation by entering a username in the sidebar</p>
+                        <div class="features">
+                            <div class="feature">
+                                <i class="fas fa-bolt"></i>
+                                <span>Realtime messaging</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-user-check"></i>
+                                <span>See who's online</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-typing"></i>
+                                <span>Typing indicators</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Typing Indicator -->
+                <div class="typing-indicator" id="typing-indicator">
+                    <span id="typing-text"></span>
+                </div>
+
+                <!-- Message Input -->
+                <div class="message-input-section" id="message-input-section" style="display: none;">
+                    <div class="input-group">
+                        <input type="text" id="message-input" placeholder="Type your message here..." disabled>
+                        <button id="send-btn" class="btn-send" disabled>
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                    <div class="input-hints">
+                        <span>Press Enter to send</span>
+                        <span>•</span>
+                        <span>Shift+Enter for new line</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Realtime Chat App • Deployed on Railway • 
+                <a href="https://github.com" target="_blank">
+                    <i class="fab fa-github"></i> Source Code
+                </a>
+            </p>
+        </footer>
+    </div>
+
+    <!-- Socket.io Client -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
